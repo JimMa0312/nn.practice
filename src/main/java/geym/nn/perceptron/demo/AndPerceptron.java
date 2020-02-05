@@ -53,6 +53,6 @@ public class AndPerceptron implements LearningEventListener {
         IterativeLearning bp=(IterativeLearning)event.getSource();
 
         System.out.println("iterate:"+bp.getCurrentIteration());
-//        System.out.println(Arrays.toString(bp.getNeuralNetwork().getWeights()));
+        System.out.println(Arrays.toString(bp.getNeuralNetwork().getWeights()));
     }
 }
