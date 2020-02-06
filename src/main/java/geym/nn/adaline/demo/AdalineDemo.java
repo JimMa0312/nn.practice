@@ -97,15 +97,12 @@ public class AdalineDemo implements LearningEventListener {
 
     public static DataSetRow createTrainDataRow(String[] image, int idealValue){
         double[] output=new double[DIGITS.length];
-        for (int i=0; i<output.length;i++){
-            output[i]=-1;
-        }
+        Arrays.fill(output, -1);
 
         double[] input=image2data(image);
 
         output[idealValue]=1;
-        DataSetRow dsr=new DataSetRow(input, output);
-        return dsr;
+        return new DataSetRow(input, output);
     }
 
     private static double[] image2data(String[] image) {
@@ -154,10 +151,10 @@ public class AdalineDemo implements LearningEventListener {
         ada.getLearningRule().addListener(new AdalineDemo());
         ada.learn(ds);
 
-        for (int i=0;i<DIGITS.length;i++){
-            ada.setInput(image2data(DIGITS[i]));
+        for (String[] digit : DIGITS) {
+            ada.setInput(image2data(digit));
             ada.calculate();
-            printDigit(DIGITS[i]);
+            printDigit(digit);
             System.out.println(maxIndex(ada.getOutput()));
             System.out.println();
         }

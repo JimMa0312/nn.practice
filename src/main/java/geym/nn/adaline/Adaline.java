@@ -19,10 +19,10 @@ public class Adaline extends NeuralNetwork<LMS> {
 
         NeuronProperties inNeuronProperties=new NeuronProperties();
         inNeuronProperties.setProperty("neuronType", InputNeuron.class);
-        /**
-         * 源书代码在这里使用的是未设定输入函数，直接函数后跟随Line输出函数，因此在2.96运行时架构没有将Input值合理注入，会导致学习异常
-         * 因为如果使用普通的Neuron类，程序在执行cacule函数时，会根据与该神经元输入线路进行权重累加和，第一层（即输入层）之前是没有结点输入的，所以输入线路的个数为0，因此Cacule计算时，就会不进行计算，返回0
-         * InputNeuron类将cacule函数进行了重写，不进行计算，直接将DataSet的input值复制到totalinput中，
+        /*
+          源书代码在这里使用的是未设定输入函数，直接函数后跟随Line输出函数，因此在2.96运行时架构没有将Input值合理注入，会导致学习异常
+          因为如果使用普通的Neuron类，程序在执行calculate函数时，会根据与该神经元输入线路进行权重累加和，第一层（即输入层）之前是没有结点输入的，所以输入线路的个数为0，因此Cacule计算时，就会不进行计算，返回0
+          InputNeuron类将calculate函数进行了重写，不进行计算，直接将DataSet的input值复制到totalnput中，
          */
 //        inNeuronProperties.setProperty("transferFunction", TransferFunctionType.LINEAR);
         Layer inputLayer= LayerFactory.createLayer(inputNeuronsCount,inNeuronProperties);
