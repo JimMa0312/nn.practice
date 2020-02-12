@@ -59,7 +59,6 @@ public class MIPerceptronAndOutputNoLearn extends MlPerceptron {
         layer=LayerFactory.createLayer(neuronsNum,outProperties);
         this.addLayer(layer);
         ConnectionFactory.fullConnect(prevLayer,layer);
-        prevLayer=layer;
 
         NeuralNetworkFactory.setDefaultIO(this);
     }
