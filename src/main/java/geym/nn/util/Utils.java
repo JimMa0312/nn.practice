@@ -1,5 +1,9 @@
 package geym.nn.util;
 
+import org.apache.commons.compress.compressors.z.ZCompressorInputStream;
+
+import java.io.*;
+
 public class Utils {
     /**
      * 将活跃度最高的所在位置激活（索引位置被置为1）
@@ -28,5 +32,48 @@ public class Utils {
         }
 
         return re;
+    }
+
+    public static void decompress(String gzFile)throws IOException{
+        int i=gzFile.lastIndexOf('.');
+        String outputFileName=gzFile.substring(0,i);
+        if(gzFile.endsWith("Z")){
+            decompressZ(new BufferedInputStream(new FileInputStream(gzFile)),
+                    new BufferedOutputStream(new FileOutputStream(outputFileName)));
+        }
+    }
+
+    public static void deleteFile(String fileName) throws IOException{
+        File file=new File(fileName);
+
+        if (file.exists()){
+            if(file.isFile()){
+                file.delete();
+            }
+        }
+    }
+
+    /**
+     * 使用Apache的工具 对Z文件解压
+     * @param is
+     * @param os
+     * @throws IOException
+     */
+    private static void decompressZ(InputStream is, OutputStream os) throws IOException{
+        ZCompressorInputStream zin=new ZCompressorInputStream(is);
+
+        try {
+            final int BUFFER=512;
+            int count;
+            final byte data[]=new byte[BUFFER];
+
+            while (-1 != (count = zin.read(data,0,BUFFER))){
+                os.write(data,0,count);
+            }
+        }finally {
+            os.close();
+            zin.close();
+            is.close();
+        }
     }
 }
