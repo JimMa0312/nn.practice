@@ -11,22 +11,22 @@
     <repositories>
         <repository>
             <id>neuroph.sourceforge.net</id>
-            <url>http://neuroph.sourceforge.net/maven2/</url>
+<url>http://neuroph.sourceforge.net/maven2/</url>
         </repository>
-    </repositories>
+        </repositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>1.19</version>
-        </dependency>
-        <dependency>
-            <groupId>org.neuroph</groupId>
-            <artifactId>neuroph-core</artifactId>
-            <version>2.96</version>
-        </dependency>
-        <!-- 删除slf4j的手动添加依赖， 原因：与Neuroph的依赖版本冲突 -->
+<dependencies>
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-compress</artifactId>
+    <version>1.19</version>
+</dependency>
+<dependency>
+    <groupId>org.neuroph</groupId>
+    <artifactId>neuroph-core</artifactId>
+    <version>2.96</version>
+</dependency>
+<!-- 删除slf4j的手动添加依赖， 原因：与Neuroph的依赖版本冲突 -->
 <!--        <dependency>-->
 <!--            <groupId>org.slf4j</groupId>-->
 <!--            <artifactId>slf4j-api</artifactId>-->
@@ -37,15 +37,15 @@
 <!--            <artifactId>slf4j-nop</artifactId>-->
 <!--            <version>1.7.25</version>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>4.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
-    </dependencies>
-</project>
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>4.1.1</version>
+</dependency>
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+</dependency>
+</dependencies>
+        </project>

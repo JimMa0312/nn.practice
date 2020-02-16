@@ -2,6 +2,7 @@ package geym.nn.isolet;
 
 import geym.nn.mlperceptron.MlPerceptron;
 import geym.nn.util.Utils;
+import geym.nn.util.isolet.IsoletReader;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.events.LearningEvent;
@@ -21,7 +22,7 @@ public class IsoletTraining implements LearningEventListener {
     }
 
     public void run() throws IOException{
-        DataSet trainingSet=IsoletReader.trainingData(IsoletDir+"/isolet1+2+3+4.data");
+        DataSet trainingSet= IsoletReader.trainingData(IsoletDir+"/isolet1+2+3+4.data");
         int inputCount=trainingSet.getRowAt(0).getInput().length;
 
         MlPerceptron myMlPerceptron=new MlPerceptron(TransferFunctionType.SIGMOID, inputCount,100,26);

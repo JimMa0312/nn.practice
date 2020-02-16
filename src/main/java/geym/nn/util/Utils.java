@@ -1,10 +1,13 @@
 package geym.nn.util;
 
+import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
 import org.apache.commons.compress.compressors.z.ZCompressorInputStream;
 
 import java.io.*;
 
 public class Utils {
+
+    private static final int BUFFER=512;
     /**
      * 将活跃度最高的所在位置激活（索引位置被置为1）
      * @param d
@@ -37,9 +40,15 @@ public class Utils {
     public static void decompress(String gzFile)throws IOException{
         int i=gzFile.lastIndexOf('.');
         String outputFileName=gzFile.substring(0,i);
+
         if(gzFile.endsWith("Z")){
             decompressZ(new BufferedInputStream(new FileInputStream(gzFile)),
                     new BufferedOutputStream(new FileOutputStream(outputFileName)));
+        }else if(gzFile.endsWith("gz")){
+            decompressGZ(new BufferedInputStream(new FileInputStream(gzFile)),
+                    new BufferedOutputStream(new FileOutputStream(outputFileName)));
+        }else{
+
         }
     }
 
@@ -54,7 +63,7 @@ public class Utils {
     }
 
     /**
-     * 使用Apache的工具 对Z文件解压
+     * 使用Apache的工具 对Z,gz文件解压
      * @param is
      * @param os
      * @throws IOException
@@ -63,7 +72,7 @@ public class Utils {
         ZCompressorInputStream zin=new ZCompressorInputStream(is);
 
         try {
-            final int BUFFER=512;
+
             int count;
             final byte data[]=new byte[BUFFER];
 
@@ -73,6 +82,23 @@ public class Utils {
         }finally {
             os.close();
             zin.close();
+            is.close();
+        }
+    }
+
+    private static void decompressGZ(InputStream is, OutputStream os) throws IOException{
+        GzipCompressorInputStream gzin=new GzipCompressorInputStream(is);
+
+        try{
+            int count;
+            final byte data[]=new byte[BUFFER];
+
+            while (-1 !=(count=gzin.read(data,0,BUFFER))){
+                os.write(data,0,count);
+            }
+        }finally {
+            os.close();
+            gzin.close();
             is.close();
         }
     }
