@@ -1,9 +1,14 @@
-package geym.nn.hopfiled;
+package geym.nn.hopfiled.demo;
 
 import geym.nn.adaline.demo.AdalineDemo;
+import geym.nn.hopfiled.StandHopfieldLearning;
+import geym.nn.hopfiled.StandHopfieldNeuronType;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.core.data.DataSetRow;
 import org.neuroph.nnet.Hopfield;
+import org.neuroph.nnet.comp.neuron.InputOutputNeuron;
+import org.neuroph.util.NeuronProperties;
+import org.neuroph.util.TransferFunctionType;
 
 import java.util.Arrays;
 
@@ -62,7 +67,9 @@ public class HopfieldSample {
         traningSet.add(AdalineDemo.createTrainDataRow(DIGITS[0],0));
         traningSet.add(AdalineDemo.createTrainDataRow(DIGITS[1],0));
 
-        Hopfield myHopfield=new Hopfield(35);
+
+
+        Hopfield myHopfield=new Hopfield(35, StandHopfieldNeuronType.getHopfieldNeuronType());
         myHopfield.setLearningRule(new StandHopfieldLearning());
         myHopfield.learn(traningSet);
 
